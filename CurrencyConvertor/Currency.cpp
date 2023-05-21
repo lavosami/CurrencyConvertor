@@ -150,6 +150,14 @@ bool Currency::operator<=(Currency& other) {
 }
 
 
+Currency Currency::operator+(double num) {
+    return Currency(balance.currency, balance.value + num);
+}
+
+Currency Currency::operator-(double num) {
+    return Currency(balance.currency, balance.value - num);
+}
+
 Currency Currency::operator*(double num) {
     return Currency(balance.currency, balance.value * num);
 }
