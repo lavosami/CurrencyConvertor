@@ -49,8 +49,17 @@ public:
     Currency operator-(Currency& other);
     Currency operator*(Currency& other);
     Currency operator/(Currency& other);
+    bool operator>(Currency& other);
+    bool operator>=(Currency& other);
+    bool operator<(Currency& other);
+    bool operator<=(Currency& other);
+    
     Currency operator*(double num);
     Currency operator/(double num);
+    bool operator>(double num);
+    bool operator>=(double num);
+    bool operator<(double num);
+    bool operator<=(double num);
 };
 
 #endif /* Currency_hpp */

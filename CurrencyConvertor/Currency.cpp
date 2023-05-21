@@ -117,10 +117,59 @@ Currency Currency::operator/(Currency& other) {
     return Currency(balance.currency, balance.value / other.balance.value);
 }
 
+bool Currency::operator>(Currency& other) {
+    if (balance.currency != other.balance.currency) {
+        other.convert(balance.currency);
+    }
+    
+    return (balance.value > other.balance.value);
+}
+
+bool Currency::operator>=(Currency& other) {
+    if (balance.currency != other.balance.currency) {
+        other.convert(balance.currency);
+    }
+    
+    return (balance.value >= other.balance.value);
+}
+
+bool Currency::operator<(Currency& other) {
+    if (balance.currency != other.balance.currency) {
+        other.convert(balance.currency);
+    }
+    
+    return (balance.value < other.balance.value);
+}
+
+bool Currency::operator<=(Currency& other) {
+    if (balance.currency != other.balance.currency) {
+        other.convert(balance.currency);
+    }
+    
+    return (balance.value <= other.balance.value);
+}
+
+
 Currency Currency::operator*(double num) {
     return Currency(balance.currency, balance.value * num);
 }
 
 Currency Currency::operator/(double num) {
     return Currency(balance.currency, balance.value / num);
+}
+
+bool Currency::operator>(double num) {
+    return (balance.value > num);
+}
+
+bool Currency::operator>=(double num) {
+    return (balance.value >= num);
+}
+
+bool Currency::operator<(double num) {
+    return (balance.value < num);
+}
+
+bool Currency::operator<=(double num) {
+    return (balance.value <= num);
 }
