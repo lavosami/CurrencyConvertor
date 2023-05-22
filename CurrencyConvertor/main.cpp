@@ -9,6 +9,10 @@
 #include "Currency.hpp"
 
 int main(int argc, const char * argv[]) {
+    Currency curr = Currency("EUR", 1);
     
+    curr.convert("USD");
+    
+    curr.print();
     return 0;
 }

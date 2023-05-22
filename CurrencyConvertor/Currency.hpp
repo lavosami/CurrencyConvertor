@@ -45,6 +45,7 @@ public:
     void print();
     
 public:
+    Currency operator=(Currency& other);
     Currency operator+(Currency& other);
     Currency operator-(Currency& other);
     Currency operator*(Currency& other);
@@ -55,6 +56,7 @@ public:
     bool operator<=(Currency& other);
     bool operator==(Currency& other);
     
+    Currency operator=(double num);
     Currency operator+(double num);
     Currency operator-(double num);
     Currency operator*(double num);

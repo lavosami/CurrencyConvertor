@@ -89,6 +89,10 @@ void Currency::print() {
 }
 
 
+Currency Currency::operator=(Currency& other) {
+    return Currency(other.balance.currency, other.balance.value);
+}
+
 Currency Currency::operator+(Currency& other) {
     if (balance.currency != other.balance.currency) {
         other.convert(balance.currency);
@@ -161,6 +165,10 @@ bool Currency::operator==(Currency& other) {
     return (balance.value == other.balance.value);
 }
 
+
+Currency Currency::operator=(double num) {
+    return Currency(balance.currency, num);
+}
 
 Currency Currency::operator+(double num) {
     return Currency(balance.currency, balance.value + num);
