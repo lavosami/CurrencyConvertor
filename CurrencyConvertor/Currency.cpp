@@ -19,6 +19,19 @@
 using json = nlohmann::json;
 
 
+Currency::Currency() {
+    balance.currency = "RUB";
+    balance.value = 0;
+    parse();
+}
+
+Currency::Currency(std::string currency, double value) {
+    balance.currency = currency;
+    balance.value = value;
+    parse();
+}
+
+
 void Currency::parse() {
     getResponse();
     
@@ -89,8 +102,15 @@ void Currency::print() {
 }
 
 
-Currency Currency::operator=(Currency& other) {
-    return Currency(other.balance.currency, other.balance.value);
+Currency& Currency::operator=(const Currency& other) {
+    if (this == &other) {
+        return *this;
+    }
+
+    balance.currency = other.balance.currency;
+    balance.value = other.balance.value;
+
+    return *this;
 }
 
 Currency Currency::operator+(Currency& other) {
@@ -107,22 +127,6 @@ Currency Currency::operator-(Currency& other) {
     }
     
     return Currency(balance.currency, balance.value - other.balance.value);
-}
-
-Currency Currency::operator*(Currency& other) {
-    if (balance.currency != other.balance.currency) {
-        other.convert(balance.currency);
-    }
-    
-    return Currency(balance.currency, balance.value * other.balance.value);
-}
-
-Currency Currency::operator/(Currency& other) {
-    if (balance.currency != other.balance.currency) {
-        other.convert(balance.currency);
-    }
-    
-    return Currency(balance.currency, balance.value / other.balance.value);
 }
 
 bool Currency::operator>(Currency& other) {
@@ -166,8 +170,14 @@ bool Currency::operator==(Currency& other) {
 }
 
 
-Currency Currency::operator=(double num) {
-    return Currency(balance.currency, num);
+Currency& Currency::operator=(double num) {
+    if (this->balance.value == num) {
+        return *this;
+    }
+    
+    balance.value = num;
+
+    return *this;
 }
 
 Currency Currency::operator+(double num) {
@@ -204,4 +214,37 @@ bool Currency::operator<=(double num) {
 
 bool Currency::operator==(double num) {
     return (balance.value == num);
+}
+
+
+Currency operator+(double num, Currency& other) {
+    return Currency(other.balance.currency, other.balance.value + num);
+}
+
+Currency operator-(double num, Currency& other) {
+    return Currency(other.balance.currency, other.balance.value - num);
+}
+
+Currency operator*(double num, Currency& other) {
+    return Currency(other.balance.currency, other.balance.value * num);
+}
+
+bool operator>(double num, Currency& other) {
+    return (num > other.balance.value);
+}
+
+bool operator>=(double num, Currency& other) {
+    return (num >= other.balance.value);
+}
+
+bool operator<(double num, Currency& other) {
+    return (num < other.balance.value);
+}
+
+bool operator<=(double num, Currency& other) {
+    return (num <= other.balance.value);
+}
+
+bool operator==(double num, Currency& other) {
+    return (num == other.balance.value);
 }

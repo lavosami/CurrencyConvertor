@@ -24,17 +24,8 @@ private:
     Balance balance;
     
 public:
-    Currency() {
-        balance.currency = "RUB";
-        balance.value = 0;
-        parse();
-    }
-    
-    Currency(std::string currency, double value) {
-        balance.currency = currency;
-        balance.value = value;
-        parse();
-    }
+    Currency();
+    Currency(std::string currency, double value);
     
 private:
     void parse();
@@ -45,18 +36,16 @@ public:
     void print();
     
 public:
-    Currency operator=(Currency& other);
+    Currency& operator=(const Currency& other);
     Currency operator+(Currency& other);
     Currency operator-(Currency& other);
-    Currency operator*(Currency& other);
-    Currency operator/(Currency& other);
     bool operator>(Currency& other);
     bool operator>=(Currency& other);
     bool operator<(Currency& other);
     bool operator<=(Currency& other);
     bool operator==(Currency& other);
     
-    Currency operator=(double num);
+    Currency& operator=(double num);
     Currency operator+(double num);
     Currency operator-(double num);
     Currency operator*(double num);
@@ -66,6 +55,15 @@ public:
     bool operator<(double num);
     bool operator<=(double num);
     bool operator==(double num);
+    
+    friend Currency operator+(double num, Currency& other);
+    friend Currency operator-(double num, Currency& other);
+    friend Currency operator*(double num, Currency& other);
+    friend bool operator>(double num, Currency& other);
+    friend bool operator>=(double num, Currency& other);
+    friend bool operator<(double num, Currency& other);
+    friend bool operator<=(double num, Currency& other);
+    friend bool operator==(double num, Currency& other);
 };
 
 #endif /* Currency_hpp */

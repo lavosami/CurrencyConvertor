@@ -13,6 +13,8 @@ int main(int argc, const char * argv[]) {
     
     curr.convert("USD");
     
+    curr = 2;
+    
     curr.print();
     return 0;
 }
