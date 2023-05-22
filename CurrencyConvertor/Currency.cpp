@@ -74,6 +74,8 @@ void Currency::convert(std::string curr) {
         balance.value = balance.value * currencies[balance.currency];
         balance.currency = "RUB";
     } else {
+        balance.value = balance.value * currencies[balance.currency];
+        balance.currency = "RUB";
         balance.value = balance.value / currencies[curr];
         balance.currency = curr;
     }
